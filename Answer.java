@@ -3,13 +3,18 @@ package testing;
 
 public class Answer {   
     public static int[][] answer(int[][] population, int x, int y, int strength) { 
-    		
+    	if(population.length<x){
+    	    return population;
+    	}
+    	if(population[y].length<y){
+    	    return population;
+    	}	
     	if(population[x][y]<=strength) {
     		population[x][y]=-1;
     		int[][] pointList;
     		pointList= CreatePoints(x,y,strength);
-    		
-    		population = CheckPoints(population, pointList, strength);
+    		int length= population[x].length;
+    		population = CheckPoints(population, pointList, strength, length);
     		return population;
     	}
     			
@@ -33,7 +38,7 @@ public class Answer {
     	}
     
     }
-    public static int[][] CheckPoints (int[][] arr, int[][] points, int s){
+    public static int[][] CheckPoints (int[][] arr, int[][] points, int s, int length){
     	int[][] recursivePoints = new int[4][2];
     	boolean notNull = false;
     	for(int[] array : arr){
@@ -48,8 +53,8 @@ public class Answer {
     	for(int[] point : points) {
     		if (arr[point[0]][point[1]]<=s && arr[point[0]][point[1]]!=-1) {
     			arr[point[0]][point[1]]=-1;
-    			recursivePoints = CreatePoints(point[0], point[1], s);
-    			arr = CheckPoints(arr, recursivePoints, s);
+    			recursivePoints = CreatePoints(point[0], point[1], length);
+    			arr = CheckPoints(arr, recursivePoints, s, length);
     		}
     	}
     	}
@@ -59,9 +64,9 @@ public class Answer {
     	int[][] points = new int[4][2];
     	int counter = 0;
     	if(IsSafeDown(x)) {
-    	int[] point= {x-1, y};
-    	points[counter]=point;
-    	counter+=1;
+            int[] point= {x-1, y};
+            points[counter]=point;
+            counter+=1;
     	}
     	if(IsSafeUp(x, s)) {
         	int[] point= {x+1, y};
@@ -81,5 +86,7 @@ public class Answer {
     	
     	return points;
     }
-    
+    public static void main (String[] args) {
+   
+    }
 }
