@@ -1,6 +1,7 @@
 package testing;
 
-
+//obviously not the quickest way to solve this problem, but i was focusing on writing modularized code that contained reusable components
+//given a change in the problem.
 public class Answer {   
     public static int[][] answer(int[][] population, int x, int y, int strength) { 
     	if(population.length<x){
